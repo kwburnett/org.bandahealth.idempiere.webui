@@ -61,35 +61,19 @@ public class DPInventory extends DashboardPanel implements EventListener<Event> 
 	private void initComponent() {
 		
 		String buttonClass = "button app big";
-		initDivButton(createOperation, CREATE_OPERATION_ID, "Navigate to Create Operation", buttonClass,
+		UIUtils.initDivButton(createOperation, this, CREATE_OPERATION_ID, "Navigate to Create Operation", buttonClass,
 				"fa fa-folder-open", "Create Operation");
-		initDivButton(viewStockOperations, VIEW_STOCK_OPERATIONS_ID, "Navigate to View Stock Operations", buttonClass,
+		UIUtils.initDivButton(viewStockOperations, this, VIEW_STOCK_OPERATIONS_ID, "Navigate to View Stock Operations", buttonClass,
 				"fa fa-list", "View Stock Operations");
-		initDivButton(stockTake, STOCK_TAKE_ID, "Navigate to Stock Take", buttonClass,
+		UIUtils.initDivButton(stockTake, this, STOCK_TAKE_ID, "Navigate to Stock Take", buttonClass,
 				"far fa-list-alt", "Stock Take");
-		initDivButton(inventoryReports, INVENTORY_REPORTS_ID, "Navigate to Inventory Reports", buttonClass,
+		UIUtils.initDivButton(inventoryReports, this, INVENTORY_REPORTS_ID, "Navigate to Inventory Reports", buttonClass,
 				"far fa-file-alt", "Inventory Reports");
 		
 		contentArea.appendChild(createOperation);
 		contentArea.appendChild(viewStockOperations);
 		contentArea.appendChild(stockTake);
 		contentArea.appendChild(inventoryReports);
-	}
-
-	private void initDivButton(Div div, String divID, String tooltipText, String classNames, String iconClassName,
-			String buttonText) {
-		
-		div.addEventListener(Events.ON_CLICK, this);
-		div.setId(divID);
-		div.setTooltiptext(tooltipText);
-		div.setClass(classNames);
-		
-		Div icon = new Div();
-		icon.setClass(iconClassName + " i");
-		div.appendChild(icon);
-		
-		Label label = new Label(buttonText);
-		div.appendChild(label);
 	}
 
 	private void initLayout() {
@@ -115,18 +99,14 @@ public class DPInventory extends DashboardPanel implements EventListener<Event> 
 			if (component instanceof Div && ((Div) component).getId().equals(CREATE_OPERATION_ID)) {
 				try
 	            {
-//					Query query = new Query(Env.getCtx(), I_AD_Window.Table_Name, "name = 'Inventory Income'", null);
-//					query.
-//					
-//					MMenu menu = new MMenu(Env.getCtx(), menuId, null);
-//					
-//					
-//					
+					Query query = new Query(Env.getCtx(), I_AD_Window.Table_Name, "name = 'Inventory Income'", null);
+					int createOperationWindowID = query.firstId();
+					
 		    		MQuery windowQuery = new MQuery("");
 		    		windowQuery.addRestriction("1=2");
 		    		windowQuery.setRecordCount(0);
 		
-					SessionManager.getAppDesktop().openWindow(1000001, windowQuery, new Callback<ADWindow>() {
+					SessionManager.getAppDesktop().openWindow(createOperationWindowID, windowQuery, new Callback<ADWindow>() {
 						
 						@Override
 						public void onCallback(ADWindow result) {

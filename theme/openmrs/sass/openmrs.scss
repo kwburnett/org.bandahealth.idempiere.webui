@@ -1,5 +1,15 @@
 .openmrs {
 
+	body & {
+		font-family: "OpenSans", Arial, sans-serif;
+		-webkit-font-smoothing: subpixel-antialiased;
+		max-width: 1000px;
+		margin: 10px auto;
+		background: #eeeeee;
+		color: #363463;
+		font-size: 16px;
+	}
+
 	/* line 1232 OpenMRS Reference App CSS */
 	.button, button, input[type="submit"], input[type="button"], input[type="submit"], a.button {
 		-moz-border-radius: 3px;
